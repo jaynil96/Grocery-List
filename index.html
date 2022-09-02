@@ -1,0 +1,29 @@
+<html lang="en" ng-app="myNinjaApp">
+<head>
+  <title> The Ninja App </title>
+  <link href="content/css/styles.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <header ng-include="'header.html'"></header>
+  <div class="content">
+    <button ng-click="order='name'">Order By Name </button>
+    <button ng-click="order='belt'">Order By Belt </button>
+      <div ng-controller="NinjaController">
+        <input input="text" ng-model="search"/>
+          <ul>
+            <li ng-repeat="x in ninjas | filter:search" ng-show="x.available">
+              <h3>{{x.name}} - {{x.rate | currency}}</h3>
+              <div class="remove" ng-click="removeNinja(x)">x</div>
+              <span class="belt" style="background: {{x.belt}}">{{x.belt}} belt</span>
+              <form ng-submit="addNinja()">
+            <input type="text" placeholder="name" ng-model="newninja.name"/>
+            <input type="text" placeholder="belt" ng-model="newninja.belt"/>
+            <input type="text" placeholder="rate" ng-model="newninja.rate"/>
+            <input type="submit" value="Add New Ninja"/>
+          </form>
+        </div>
+      </div>
+    </body>
+</html>
